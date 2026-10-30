@@ -51,11 +51,8 @@ a{text-decoration:none;color:inherit}
 .p-info .btn{margin-top:6px}
 
 /* ===== Video ===== */
-.video{position:relative;height:560px;background:#000;cursor:pointer;margin-top:8px}
-.video img{height:100%;object-fit:cover}
-.video iframe{width:100%;height:100%;border:0;display:block}
-.play{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(0,0,0,.45)}
-.play::after{content:"";position:absolute;left:24px;top:17px;border-left:22px solid #fff;border-top:15px solid transparent;border-bottom:15px solid transparent}
+.video{background:#000;margin-top:8px}
+.video video{display:block;width:100%;max-height:640px;background:#000}
 
 /* ===== Lợi ích ===== */
 .lead{color:var(--muted);margin:-6px 0 12px}
@@ -112,7 +109,7 @@ a{text-decoration:none;color:inherit}
 .c-head{display:flex;justify-content:space-between;font-size:15px;font-weight:700;padding-bottom:4px}
 .c-head span{color:var(--muted);font-size:13px;font-weight:500}
 .c{display:flex;gap:10px;padding:12px 0;border-top:1px solid var(--line)}
-.ava{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:14px;font-weight:600}
+.ava{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:14px;font-weight:600;object-fit:cover;overflow:hidden}
 .c h5{font-size:13px;font-weight:600;color:var(--muted)}
 .c p{font-size:14px;margin:2px 0 4px}
 .c .st{color:#ffb400;font-size:12px;letter-spacing:1px}

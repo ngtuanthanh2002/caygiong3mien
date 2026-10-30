@@ -32,11 +32,12 @@
         <img src="anh/sl12.webp" alt="Cau ăn cùng trầu">
         <img src="anh/sl13.png" alt="Quả cau và lá trầu">
         <img src="anh/cay1.png" alt="Cây cau giống trong bầu">
+        <img src="anh/cay3.jpg" alt="Cây cau giống ngoài vườn ươm">
         <img src="anh/cay2.png" alt="Vườn cây cau giống">
       </div>
       <button class="g-arrow g-prev" type="button" aria-label="Ảnh trước"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
       <button class="g-arrow g-next" type="button" aria-label="Ảnh sau"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-      <span class="g-count" id="count">1/9</span>
+      <span class="g-count" id="count">1/10</span>
       <div class="g-thumbs" id="thumbs"></div>
     </div>
     <div class="flash">
@@ -56,9 +57,10 @@
     </div>
   </section>
 
-  <section class="video" id="video" data-yt="5V4E-FvL4As">
-    <img src="anh/cay2.png" alt="Video cây cau đuôi chồn">
-    <span class="play"></span>
+  <section class="video">
+    <video controls playsinline preload="none" poster="anh/cay3.jpg">
+      <source src="video/cau.mp4" type="video/mp4">
+    </video>
   </section>
 
   <!-- Form đặt hàng -->
@@ -146,23 +148,23 @@
   <section class="card">
     <div class="c-head">Bình luận <span>1762 bình luận</span></div>
     <div class="c">
-      <div class="ava" style="background:#7a5a46">M</div>
+      <img class="ava" src="people/image.png" alt="Mai Hà">
       <div><h5>Mai Hà</h5><div class="st">★★★★★</div><p>Chị nhận được hàng rồi, cây giống rất dễ sống, có khi phải đặt thêm vài cây nữa về trồng</p><div class="m"><span>2 ngày trước</span><span>♡ 6</span></div></div>
     </div>
     <div class="c">
-      <div class="ava" style="background:#a23b3b">H</div>
+      <img class="ava" src="people/image copy.png" alt="Hồng Ngọc">
       <div><h5>Hồng Ngọc</h5><div class="st">★★★★★</div><p>Cây của mình mới gieo được hơn 2 năm nè, bình luận lên đây cho mọi người cùng xem, cảm ơn shop hỗ trợ gieo trồng</p><div class="m"><span>1 ngày trước</span><span>♡ 7</span></div></div>
     </div>
     <div class="c">
-      <div class="ava" style="background:#3f4d5e">M</div>
+      <img class="ava" src="people/image copy 2.png" alt="Mạnh Hùng">
       <div><h5>Mạnh Hùng</h5><div class="st">★★★★★</div><p>Mình đặt mua ở web này cách 4 tuần nhận hàng rất nhanh, còn hỗ trợ mình trồng và chăm sóc rất nhiệt tình. Trồng ổn rồi không biết 1-2 tháng tới như nào nữa.</p><div class="m"><span>22 giờ trước</span><span>♡ 4</span></div></div>
     </div>
     <div class="c">
-      <div class="ava" style="background:#7c4a8a">L</div>
+      <img class="ava" src="people/image copy 3.png" alt="Lam Quynh">
       <div><h5>Lam Quynh</h5><div class="st">★★★★★</div><p>Cây nhà mình ra quả rồi nè, bán cái này giá gấp 3 lần mít kia vẫn cháy hàng</p><div class="m"><span>2 giờ trước</span><span>♡ 12</span></div></div>
     </div>
     <div class="c">
-      <div class="ava" style="background:#2f8f7a">L</div>
+      <img class="ava" src="people/image copy 4.png" alt="Lan Anh">
       <div><h5>Lan Anh</h5><p>Chị đặt hàng hôm qua shop đã gửi chưa. Nếu chưa gửi thì gửi thêm cùng cho chị 3 cây nữa nhé</p></div>
     </div>
     <a href="#dang-ky" class="btn"><span>Nhận ưu đãi</span></a>
@@ -214,13 +216,6 @@ document.querySelector('.g-next').onclick=function(){go(cur()+1);};
 var auto;
 function chay(){clearInterval(auto);auto=setInterval(function(){go(cur()+1);},5000);}
 document.querySelector('.gallery').addEventListener('pointerdown',chay);chay();
-
-// Video: bấm mới tải YouTube
-var v=document.getElementById('video');
-v.onclick=function(){
-  if(v.querySelector('iframe'))return;
-  v.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+v.dataset.yt+'?autoplay=1" allow="autoplay;encrypted-media" allowfullscreen title="Video cây cau đuôi chồn"></iframe>';
-};
 
 // Đếm ngược, hết giờ tự đếm lại
 (function(){
