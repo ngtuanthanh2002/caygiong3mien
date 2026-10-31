@@ -248,7 +248,7 @@ document.getElementById('m-retry').onclick=function(){
 };
 
 // Gửi đơn: dán link Web App của Google Apps Script vào ORDER_URL (xem file nhan-don-google-sheet.gs)
-var ORDER_URL='https://script.google.com/macros/s/AKfycbyOZmaEg1q9fs4TkpLaY4m0aOhVJKAre9MJUDLUfcqDMrgvsloyheg6L07NfqQxv7E/exec';
+var ORDER_URL='https://script.google.com/macros/s/AKfycbxycIx3vBJLRRAZKgBfuULAbCi0h4vYltuQkFRiZpKrsTZTH9oOVGpNgCq_jAw-zjg/exec';
 function gui(don){
   if(!ORDER_URL)return Promise.reject(new Error('Chưa cấu hình ORDER_URL'));
   // Web App trả về {"ok":true}; lỗi mạng, hết giờ hoặc phản hồi khác đều tính là thất bại
