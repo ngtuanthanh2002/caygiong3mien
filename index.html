@@ -184,6 +184,7 @@
     <h3 id="m-title"></h3>
     <p id="m-text"></p>
     <div class="m-btns">
+      <button type="button" class="pri m-retry" id="m-retry">Thử lại</button>
       <a class="pri m-call" href="tel:0368555616">Gọi 0368 555 616</a>
       <button type="button" class="sec" id="m-close">Đóng</button>
     </div>
@@ -232,24 +233,29 @@ document.querySelector('.gallery').addEventListener('pointerdown',chay);chay();
 })();
 
 // Modal thông báo
-var modal=document.getElementById('modal');
+var modal=document.getElementById('modal'),formDangGui=null;
 function show(ok,title,text){
   modal.className='modal on '+(ok?'ok':'err');
   document.getElementById('m-ico').textContent=ok?'✓':'!';
   document.getElementById('m-title').textContent=title;
   document.getElementById('m-text').textContent=text;
 }
-document.getElementById('m-close').onclick=function(){modal.classList.remove('on');};
+function dong(){modal.classList.remove('on');}
+document.getElementById('m-close').onclick=dong;
+document.getElementById('m-retry').onclick=function(){
+  dong();
+  if(formDangGui){formDangGui.requestSubmit?formDangGui.requestSubmit():formDangGui.querySelector('button[type=submit]').click();}
+};
 
 // Gửi đơn: dán link Web App của Google Apps Script vào ORDER_URL (xem file nhan-don-google-sheet.gs)
-var ORDER_URL='';
+var ORDER_URL='https://script.google.com/macros/s/AKfycbyOZmaEg1q9fs4TkpLaY4m0aOhVJKAre9MJUDLUfcqDMrgvsloyheg6L07NfqQxv7E/exec';
 function gui(don){
   if(!ORDER_URL)return Promise.reject(new Error('Chưa cấu hình ORDER_URL'));
   // Web App trả về {"ok":true}; lỗi mạng, hết giờ hoặc phản hồi khác đều tính là thất bại
   var ctl=new AbortController(),t=setTimeout(function(){ctl.abort();},15000);
   return fetch(ORDER_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(don),signal:ctl.signal})
-    .then(function(r){return r.json();})
-    .then(function(k){clearTimeout(t);if(!k.ok)throw new Error('Máy chủ từ chối đơn');});
+    .then(function(r){clearTimeout(t);return r.json();})
+    .then(function(k){if(!k||!k.ok)throw new Error(k&&k.msg?k.msg:'Máy chủ từ chối đơn');});
 }
 
 function vnd(n){return n.toLocaleString('vi-VN')+'₫';}
@@ -267,11 +273,12 @@ function vnd(n){return n.toLocaleString('vi-VN')+'₫';}
       goi:f.querySelector('[name=goi]:checked').value,phan:f.querySelector('[name=phan]:checked').value,
       tong:tong(),luc:new Date().toLocaleString('vi-VN')};
     nut.disabled=true;chu.textContent='Đang gửi đơn...';
+    formDangGui=f;
     gui(don).then(function(){
-      show(true,'Đặt hàng thành công','Cảm ơn '+don.ten+'. Nhà vườn sẽ gọi đến số '+don.sdt+' để xác nhận đơn.');
-      f.reset();capNhat();
+      show(true,'Đặt hàng thành công','Cảm ơn '+don.ten+'. Đơn đã được lưu, nhà vườn sẽ gọi đến số '+don.sdt+' để xác nhận.');
+      f.reset();capNhat();formDangGui=null;
     }).catch(function(){
-      show(false,'Chưa gửi được đơn','Đơn hàng chưa đến được nhà vườn. Vui lòng thử lại hoặc gọi hotline để đặt trực tiếp.');
+      show(false,'Chưa gửi được đơn','Đơn hàng chưa đến được nhà vườn. Bấm "Thử lại" để gửi lại, hoặc gọi hotline để đặt trực tiếp.');
     }).then(function(){nut.disabled=false;chu.textContent=cu;});
   });
 });
